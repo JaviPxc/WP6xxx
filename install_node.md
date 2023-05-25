@@ -35,9 +35,14 @@ Cuando el paquete haya sido instalado globalmente, necesitamos descargar PM2 en 
 - ```cd pm2```
 - ```npm install pm2```
 Después de la instalación de PM2 en nuestra carpeta local, hay que empaquetar todo:
-- ```npm-bundle pm2```
+- ```npm-bundle pm2```. Esto generará el fichero pm2-5.3.0.tgz (según versión) dentro del directorio pm2 creado anteriormente.
 
-
+## Copiar los tarballs Node-Red y PM2 del host a la WP6000
+1. Conéctese a la WP6000 por __SFTP__ a través de su dirección IP e inicie sesión como usuario browser. La contraseña por defecto para el usuario browser es browser.
+2. Copiar los ficheros __node-v18.16.0-linux-arm64.tar.xz__ y __pm2-5.3.0.tgz__ a __/home/browser/__.
+3. Conéctese al controlador por __SSH__ como browser.
+ 
+  
 
 
 
