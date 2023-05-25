@@ -24,17 +24,18 @@ Una vez decidida la versión a instalar, descargarla mediante el siguiente coman
 - Descarga desde la página web : https://nodejs.org/es/download --> Versión Binarios Linux ARMv8 (64 bits)
 
 ## PM2
-Al contrario que Node.js, PM2 no puede descargarse como tar.gz. Para instalarlo, es necesario descargar su paquete npm y hacer un tarball nosotros mismos. Para ello, es nevcesario tener Node.js y npm instalados en nuestro host Linux.
-Para empezar, ejecuta el siguiente comando
-npm install -g npm-bundle
+Al contrario que Node.js, PM2 no puede descargarse como tar.gz. Para instalarlo, es necesario descargar su paquete npm y hacer un tarball nosotros mismos. Para ello, es necesario tener Node.js y npm instalados en nuestro host Linux. Si no estuvieran disponibles en el sistema, ejecutar los siguiente comandos en nuestro host Linux:
+- ```apt install nodejs```
+- ```apt install npm```
+Una vez instalados Node.js y npm, ejecutar el comando:
+- ```npm install -g npm-bundle```
 Esto instala el paquete "npm-bundle" globalmente. El paquete "npm-bundle" nos permitirá crear un tarball de PM2 y todas sus dependencias una vez que lo hayamos descargado.
-Cuando el paquete haya sido instalado globalmente, necesitamos descargar PM2 en una carpeta local. Hazlo ejecutando estos comandos
-mkdir pm2
-cd pm2
-npm install pm2
-Después de la instalación de PM2 en nuestra carpeta creada, vamos a empaquetar todo:
-npm-bundle pm2
-El tarball creado se encuentra en tu carpeta PM2.
+Cuando el paquete haya sido instalado globalmente, necesitamos descargar PM2 en una carpeta local de nuestro host Linux. Para ello, ejecutar los comandos:
+- ```mkdir pm2```
+- ```cd pm2```
+- ```npm install pm2```
+Después de la instalación de PM2 en nuestra carpeta local, hay que empaquetar todo:
+- ```npm-bundle pm2```
 
 
 
