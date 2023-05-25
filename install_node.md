@@ -13,8 +13,9 @@ Si no tiene un host con Linux, es posible ejecutar un sistema operativo Linux (p
 - Ejecutar el comando ```wsl -l -v``` y comprobar que tenemos la distribución Ubuntu instalada con la versión de WSL 2.
 - Si la versión de WSL es la 1, se puede modificar ejecutando el comando ```wsl --set-version <distro name> 2``` (donde <distro name> en nuestro caso será Ubuntu).
 - Ejecutar el comando ```wsl``` para __entrar en la distribución de Linux instalada__. A partir de aquí, la terminal ejecutará comandos de Linux. Para salir de WSL ejecutar el comando ```exit```.
-- Los directorios de nuestro host Windows estarán montados sobre la ruta /mnt/ de la distribución de Linux. Por ejemplo, el directorio ```C:\Users\miusuario``` en Windows será ```/mnt/c/Users/miusuario``` en la distribución de Linux.
-
+- Los directorios de nuestro host Windows estarán montados sobre la ruta /mnt/ de la distribución de Linux. Por ejemplo, el directorio ```C:\Users\miusuario\Downloads``` en Windows será ```/mnt/c/Users/miusuario/Downloads``` en la distribución de Linux.
+- Comprobar que la distribución de Linux tenga acceso a internet, por ejemplo con ```ping google.com```. Si no es así, revisar la configuración IP y que el fichero ```/etc/resolv.conf``` tenga el siguiente contenido ```nameserver 8.8.8.8```.
+  
 ## Node.js
 Cuando se escribió esta guía, la última versión estable de Node.js era la 18.16.0. Para comprobar la última versión de Node.js, visitar la página principal de [Node.js](https://nodejs.org/es/). 
 Una vez decidida la versión a instalar, descargarla mediante el siguiente comando (adaptar según la versión):
@@ -23,7 +24,7 @@ Una vez decidida la versión a instalar, descargarla mediante el siguiente coman
 - Descarga desde la página web : https://nodejs.org/es/download --> Versión Binarios Linux ARMv8 (64 bits)
 
 ## PM2
-Al contrario que Node.js, PM2 no puede descargarse como tar.gz. Para instalarlo, es necesario descargar su paquete npm y hacer un tarball nosotros mismos. Para ello, es nevcesario tener Node.js y npm instalados en nuestro host (Linux o Windows).
+Al contrario que Node.js, PM2 no puede descargarse como tar.gz. Para instalarlo, es necesario descargar su paquete npm y hacer un tarball nosotros mismos. Para ello, es nevcesario tener Node.js y npm instalados en nuestro host Linux.
 Para empezar, ejecuta el siguiente comando
 npm install -g npm-bundle
 Esto instala el paquete "npm-bundle" globalmente. El paquete "npm-bundle" nos permitirá crear un tarball de PM2 y todas sus dependencias una vez que lo hayamos descargado.
