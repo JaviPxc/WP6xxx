@@ -69,25 +69,28 @@ Después de la instalación de PM2 en nuestra carpeta local, hay que empaquetar 
 
 
 ## Instalar el proyecto de Node
-Para mostrarte cómo puedes configurar un entorno de proyecto Node.js en la WP6000 sin conexión a Internet vamos a hacer un proyecto de ejemplo que contenga el paquete node-red con algunos otros módulos.
-En el ordenador anfitrión
-Crea un directorio en el que instalarás todos los módulos necesarios:
-mkdir /home/navegador/nodeProj
-cd /home/browser/nodeProj
-Ahora instala los módulos necesarios localmente. Como ejemplo descargaré node-red.
-npm install node-red
-
-Transfiere tu carpeta a la carpeta /home/browser/ en el destino:
-scp -r nodeProj browser@192.168.1.109:/home/browser
-Tan pronto como termine la transferencia, inicia sesión de nuevo en el objetivo:
-ssh browser@192.168.1.109
-Inicie Node-RED ejecutando el archivo red.js a través de PM2:
-pm2 start /home/navegador/nodeProj/node_modules/node-red/red.js
-Si quieres iniciar tu proyecto al arrancar ejecuta también estos comandos
-pm2 save
-
- 
+Como ejemplo de configurar un entorno de proyecto Node.js en la WP6000 sin conexión a Internet vamos a hacer un proyecto de ejemplo que contenga el paquete node-red con algunos otros módulos.
   
+### En nuestro host Linux
+1. Crear el directorio en el que instalar todos los módulos necesarios:
+  ```mkdir -p /mnt/c/Users/Downloads/nodeProject```
+  ```cd /mnt/c/Users/Downloads/nodeProject```
+2. Ahora, instalar los módulos necesarios en local. Por ejemplo, descargar node-red y comprimirlo.
+  ```npm install node-red```
+  ```zip -r  /mnt/c/Users/Downloads/nodeProject.zip /mnt/c/Users/Downloads/nodeProject```
 
+### Transferir lel fichero nodeProject.zip al directorio /home/browser/ en la WP6000:
+1. Conéctese a la WP6000 por __SFTP__ a través de su dirección IP e inicie sesión como usuario browser. La contraseña por defecto para el usuario browser es browser.
+2. Copiar el fichero __nodeProject.zip__ a __/home/browser/__.
+3. Conectar al dispositivo por __SSH__ como browser. 
+  ```mkdir -p /home/browser/nodeProject```
+  ```unzip /home/browser/nodeProject.zip -d /home/browser/nodeProject```
+4. Iniciar Node-RED ejecutando el archivo red.js a través de PM2:
+  ```pm2 start /home/browser/nodeProject/node_modules/node-red/red.js```
+5. Si quieres iniciar tu proyecto automáticamente al arrancar el equipo, ejecutar también estos comandos:
+  ```pm2 save```
+  Cambiar al usuario root. Ejecutar el comando ```su```. La contraseña para root es foo.
+  Ejecutar el comando:
+  ```env PATH=$PATH:/opt/node-v18.16.0-linux-arm64/bin /opt/pm2/bin/pm2 startup systemd -u browser --hp /home/browser```
 
-
+Si ahora va a la dirección IP de su WP6000 seguido por el puerto 1880, debería ver el entorno Node-RED. Por ejemplo, http://198.168.1.109:1880
