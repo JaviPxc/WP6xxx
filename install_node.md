@@ -19,9 +19,8 @@ Si no tiene un host con Linux, es posible ejecutar un sistema operativo Linux (p
 ## Node.js
 Cuando se escribió esta guía, la última versión estable de Node.js era la 18.16.0. Para comprobar la última versión de Node.js, visitar la página principal de [Node.js](https://nodejs.org/es/). 
 Una vez decidida la versión a instalar, descargarla mediante el siguiente comando (adaptar según la versión):
-- Linux: ```curl -LO https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-arm64.tar.xz``` . Si curl no está instalado, se puede instalar con el comando: ```apt-get install curl```
-- Windows: ```curl -LO https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-arm64.tar.xz```
-- Descarga desde la página web : https://nodejs.org/es/download --> Versión Binarios Linux ARMv8 (64 bits)
+- Linux: ```curl -LO https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-arm64.tar.gz``` . Si curl no está instalado, se puede instalar con el comando: ```apt-get install curl```
+- Windows: ```curl -LO https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-arm64.tar.gz```
 
 ## PM2
 Al contrario que Node.js, PM2 no puede descargarse como tar.gz. Para instalarlo, es necesario descargar su paquete npm y hacer un tarball nosotros mismos. Para ello, es necesario tener Node.js y npm instalados en nuestro host Linux. Si no estuvieran disponibles en el sistema, ejecutar los siguiente comandos en nuestro host Linux:
@@ -39,8 +38,30 @@ Después de la instalación de PM2 en nuestra carpeta local, hay que empaquetar 
 
 ## Copiar los tarballs Node-Red y PM2 del host a la WP6000
 1. Conéctese a la WP6000 por __SFTP__ a través de su dirección IP e inicie sesión como usuario browser. La contraseña por defecto para el usuario browser es browser.
-2. Copiar los ficheros __node-v18.16.0-linux-arm64.tar.xz__ y __pm2-5.3.0.tgz__ a __/home/browser/__.
-3. Conéctese al controlador por __SSH__ como browser.
+2. Copiar los ficheros __node-v18.16.0-linux-arm64.tar.gz__ y __pm2-5.3.0.tgz__ a __/home/browser/__.
+
+## Instalación en WP6000
+1. Conectar al dispositivo por __SSH__ como browser. 
+2. Cambiar al usuario root. Ejecutar el comando ```su```. La contraseña para root es foo. 
+3. Descomprimir los 2 ficheros en la carpeta /opt. Ejecutar los comandos:
+  ```mkdir -p /opt```
+  ```tar xpf /home/browser/node-v18.16.0-linux-arm64.tar.gz -C /opt```
+  ```tar xpf /home/browser/pm2-5.3.0.tgz -C /opt```
+4. El paquete PM2 se va a extraer en una carpeta llamada _package_. Para cambiar el nombre, ejecutar el comando:
+  ```mv /opt/package /opt/pm2```
+5. Ahora que todo está instalado, se pueden eliminar los 2 tarballs:
+  ```rm /home/browser/node-v18.16.0-linux-arm64.tar.gz```
+  ```rm /home/browser/pm2-5.3.0.tgz```
+
+6. El último paso es añadir las nuevas rutas bin al PATH para que los comandos __PM2, npm y node__ esten disponibles en todo el sistema.
+7. Crear y editar un nuevo archivo /etc/profile.d/node.sh
+  ```mkdir -p /etc/profile.d```
+  ```vim /etc/profile.d/node.sh```
+8. Añadir las siguientes líneas en el archivo:
+  ```  #!/bin/sh
+    export PATH="$PATH:/opt/node-v16.15.1-linux-arm64/bin:/opt/pm2/bin"   ```
+  
+
  
   
 
