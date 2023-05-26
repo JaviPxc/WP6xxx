@@ -58,7 +58,8 @@ Después de la instalación de PM2 en nuestra carpeta local, hay que empaquetar 
   ```mkdir -p /etc/profile.d```
   ```vim /etc/profile.d/node.sh```
 8. Añadir las siguientes líneas en el archivo:
-  ```  #!/bin/sh
+  ```  
+    #!/bin/sh
     export PATH="$PATH:/opt/node-v16.15.1-linux-arm64/bin:/opt/pm2/bin"   
   ```
   
