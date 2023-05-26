@@ -60,9 +60,31 @@ Después de la instalación de PM2 en nuestra carpeta local, hay que empaquetar 
 8. Añadir las siguientes líneas en el archivo:
   ```  
     #!/bin/sh
-    export PATH="$PATH:/opt/node-v16.15.1-linux-arm64/bin:/opt/pm2/bin"   
+    export PATH="$PATH:/opt/node-v18.16.0-linux-arm64/bin:/opt/pm2/bin"   
   ```
-  
+9. Después de volver a iniciar sesión o reiniciar el equipo, se debería poder utilizar el comando npm, node y pm2 con el usuario browser.
+  ```node -v```
+  ```npm -v```
+  ```pm2 -v```
+
+
+## Instalar el proyecto de Node
+Para mostrarte cómo puedes configurar un entorno de proyecto Node.js en la WP6000 sin conexión a Internet vamos a hacer un proyecto de ejemplo que contenga el paquete node-red con algunos otros módulos.
+En el ordenador anfitrión
+Crea un directorio en el que instalarás todos los módulos necesarios:
+mkdir /home/navegador/nodeProj
+cd /home/browser/nodeProj
+Ahora instala los módulos necesarios localmente. Como ejemplo descargaré node-red.
+npm install node-red
+
+Transfiere tu carpeta a la carpeta /home/browser/ en el destino:
+scp -r nodeProj browser@192.168.1.109:/home/browser
+Tan pronto como termine la transferencia, inicia sesión de nuevo en el objetivo:
+ssh browser@192.168.1.109
+Inicie Node-RED ejecutando el archivo red.js a través de PM2:
+pm2 start /home/navegador/nodeProj/node_modules/node-red/red.js
+Si quieres iniciar tu proyecto al arrancar ejecuta también estos comandos
+pm2 save
 
  
   
